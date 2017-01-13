@@ -32,6 +32,9 @@ import java.util.*;
 class Solution {
    public int solution(int N, int M) {
       
+      if (M == 1) return N;
+      if (N % M == 0) return N/M;
+      
       int[] chocolates = new int[N];
       int i = 0;
       int numChocolates = 0;      
@@ -40,8 +43,17 @@ class Solution {
          chocolates[i] = 1;
          //System.out.println("i: " + i);
          i = (i+M)%N;
-
       }
+
+// gets past some of the large number tests but also gets some wrong??
+//       i = M;
+//       numChocolates++;
+//       while (M % N != 0) {
+//          numChocolates++;
+//          M = M + i;
+//          //System.out.println("M = " + M);  
+//       }
+      
          
             
       return numChocolates; 
@@ -54,10 +66,28 @@ class Solution {
 
       //test cases   
         
-      System.out.println(sol.solution(10, 4));
-      System.out.println(sol.solution(12, 3));
-      //System.out.println(sol.solution(1000000000, 1));      //fails
-  
+      System.out.println("N = 12, M = 12: " + sol.solution(12, 12));
+      System.out.println("N = 12, M = 6: " + sol.solution(12, 6));
+      System.out.println("N = 12, M = 4: " + sol.solution(12, 4));
+      System.out.println("N = 12, M = 3: " + sol.solution(12, 3));
+      System.out.println("N = 12, M = 2: " + sol.solution(12, 2));
+      System.out.println("N = 12, M = 1: " + sol.solution(12, 1));      
+      System.out.println("N = 12, M = 5: " + sol.solution(12, 5));
+      System.out.println("N = 12, M = 7: " + sol.solution(12, 7));       
+      System.out.println("N = 12, M = 8: " + sol.solution(12, 8)); 
+      System.out.println("N = 12, M = 9: " + sol.solution(12, 9));
+      System.out.println("N = 12, M = 10: " + sol.solution(12, 10));
+      System.out.println("N = 12, M = 11: " + sol.solution(12, 11));            
+      System.out.println();
+      
+
+      System.out.println("N = 4, M = 4: " + sol.solution(4, 4));
+      System.out.println("N = 4, M = 3: " + sol.solution(4, 3));
+      System.out.println("N = 4, M = 2: " + sol.solution(4, 2));
+      System.out.println("N = 24, M = 18: " + sol.solution(24, 18));
+      System.out.println(sol.solution(1000000000, 1));      //
+      //System.out.println(sol.solution(415633212, 234332));  //large numbers
+      System.out.println(sol.solution(947853, 4453));  //large numbers      
 
    
    }
