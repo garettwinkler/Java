@@ -31,34 +31,34 @@ import java.util.*;
 
 class Solution {
    public int solution(int N, int M) {
-      
-      if (M == 1) return N;
-      if (N % M == 0) return N/M;
-      
-      int[] chocolates = new int[N];
-      int i = 0;
-      int numChocolates = 0;      
-      while (chocolates[i] != 1) {
-         numChocolates++;
-         chocolates[i] = 1;
-         //System.out.println("i: " + i);
-         i = (i+M)%N;
-      }
-
-// gets past some of the large number tests but also gets some wrong??
-//       i = M;
-//       numChocolates++;
-//       while (M % N != 0) {
+  
+  
+//bad solution 100% correctness but fails some performance tests, not O(logN+M)    
+//       if (M == 1) return N;
+//       if (N % M == 0) return N/M;
+//       
+//       int[] chocolates = new int[N];
+//       int i = 0;
+//       int numChocolates = 0;      
+//       while (chocolates[i] != 1) {
 //          numChocolates++;
-//          M = M + i;
-//          //System.out.println("M = " + M);  
+//          chocolates[i] = 1;
+//          //System.out.println("i: " + i);
+//          i = (i+M)%N;
 //       }
-      
          
-            
-      return numChocolates; 
+      return N/greatestComDenom(M,N); 
    }
     
+   //actual solution
+   public static int greatestComDenom(int A, int B) {
+      if (A % B == 0) {
+         return B;
+      }
+      else {
+         return greatestComDenom(B, (A % B));
+      }
+   }
     
    public static void main(String[] args) {
    
@@ -86,8 +86,8 @@ class Solution {
       System.out.println("N = 4, M = 2: " + sol.solution(4, 2));
       System.out.println("N = 24, M = 18: " + sol.solution(24, 18));
       System.out.println(sol.solution(1000000000, 1));      //
-      //System.out.println(sol.solution(415633212, 234332));  //large numbers
-      System.out.println(sol.solution(947853, 4453));  //large numbers      
+      System.out.println(sol.solution(415633212, 234332));  //large numbers case
+      System.out.println(sol.solution(947853, 4453));  //large numbers case     
 
    
    }
