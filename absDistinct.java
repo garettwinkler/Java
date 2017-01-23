@@ -44,13 +44,39 @@ class Solution {
    public int solution(int[] A) {
       int distinct = 0;
       
-      int[] B = new int[10000000];
-      for (int i = 0; i < A.length; i++) {
-         if (B[Math.abs(A[i])] == 0) {
-            distinct++;
-            B[Math.abs(A[i])] = 1;
+// cheating method, fails when max int value 2,147,483,647 used. 92%
+//       int[] B = new int[10000000];
+//       for (int i = 0; i < A.length; i++) {
+//          if (B[Math.abs(A[i])] == 0) {
+//             distinct++;
+//             B[Math.abs(A[i])] = 1;
+//          }
+//       }
+
+      int min = 0;
+      int max = A.length-1;
+      int currentValue;
+      int lastValue;
+      while (min <= max) {
+         if ( Math.abs(A[min]) > Math.abs(A[max]) ) {
+            currentValue = Math.abs(A[min]);
+            min++;
          }
+         else if ( Math.abs(A[min]) < Math.abs(A[max]) ) {
+            currentValue = Math.abs(A[max]);
+            max--;
+         }
+         else {
+            currentValue = Math.abs(A[max]);         
+            min++;
+            max--;
+         }
+         
+         distinct++;
+
+
       }
+      
    
       return distinct;
    }
@@ -60,8 +86,15 @@ class Solution {
       Solution sol = new Solution();
       
       int[] A = {-5, -3, -1, 0, 3, 6};
+      int[] B = {-5, -3, -1, 0, 1};
+      int[] C = {};
+      int[] D = {1,1,1,1,1};     // 1 fails these two rn
+      int[] F = {-2,-1,0,1,1,2}; // 3
       System.out.println(sol.solution(A));
-      
+      System.out.println(sol.solution(B));
+      System.out.println(sol.solution(C));
+      System.out.println(sol.solution(D));
+      System.out.println(sol.solution(F));
    }
 
 }
