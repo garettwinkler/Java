@@ -56,7 +56,7 @@ class Solution {
       int min = 0;
       int max = A.length-1;
       int currentValue;
-      int lastValue;
+      int lastValue = 0;
       while (min <= max) {
          if ( Math.abs(A[min]) > Math.abs(A[max]) ) {
             currentValue = Math.abs(A[min]);
@@ -71,30 +71,43 @@ class Solution {
             min++;
             max--;
          }
+        
+         if (lastValue != currentValue) {
+            distinct++;
+         }
          
-         distinct++;
-
-
+         lastValue = currentValue;
       }
       
-   
+      //to handle edge case of only 0's. Would fail w/o b/c lastValue is initialized to 0 and would never count      
+      if (distinct == 0 && A.length > 0) {
+         return 1;       
+      }
       return distinct;
    }
    
    public static void main (String[] args) {
       //test cases
       Solution sol = new Solution();
+//       System.out.println("abs of -2147483648: " + Math.abs(-2147483648));
+//       System.out.println("abs of -2147483647: " + Math.abs(-2147483647));      
       
-      int[] A = {-5, -3, -1, 0, 3, 6};
-      int[] B = {-5, -3, -1, 0, 1};
-      int[] C = {};
-      int[] D = {1,1,1,1,1};     // 1 fails these two rn
-      int[] F = {-2,-1,0,1,1,2}; // 3
+      int[] A = {-5, -3, -1, 0, 3, 6}; // 5
+      int[] B = {-5, -3, -1, 0, 1};    // 4
+      int[] C = {};              // 0
+      int[] D = {1,1,1,1,1};     // 1 
+      int[] E = {-2,-1,0,1,1,2}; // 3
+      int[] F = {0,1}; // 2
+      int[] G = {0,0}; // 1
+      int[] H = {-2147483648,0}; // 2      
       System.out.println(sol.solution(A));
       System.out.println(sol.solution(B));
       System.out.println(sol.solution(C));
       System.out.println(sol.solution(D));
-      System.out.println(sol.solution(F));
+      System.out.println(sol.solution(E));
+      System.out.println(sol.solution(F));      
+      System.out.println(sol.solution(G));            
+      System.out.println(sol.solution(H));      
    }
 
 }
