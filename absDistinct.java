@@ -44,7 +44,7 @@ class Solution {
    public int solution(int[] A) {
       int distinct = 0;
       
-// cheating method, fails when max int value 2,147,483,647 used. 92%
+// cheating method (using extra array), fails when extreme high/low ints used eg Integer.MAX_VALUE. 92%
 //       int[] B = new int[10000000];
 //       for (int i = 0; i < A.length; i++) {
 //          if (B[Math.abs(A[i])] == 0) {
@@ -65,6 +65,11 @@ class Solution {
          else if ( Math.abs(A[min]) < Math.abs(A[max]) ) {
             currentValue = Math.abs(A[max]);
             max--;
+            if (A[min] == Integer.MIN_VALUE) {     // probably a better way to handle this case
+               currentValue = A[min];              // -2147483648
+               max++;
+               min++;
+            }                         
          }
          else {
             currentValue = Math.abs(A[max]);         
@@ -79,7 +84,7 @@ class Solution {
          lastValue = currentValue;
       }
       
-      //to handle edge case of only 0's. Would fail w/o b/c lastValue is initialized to 0 and would never count      
+      //to handle edge case of only 0's. Would fail b/c lastValue is initialized to 0 and would never count      
       if (distinct == 0 && A.length > 0) {
          return 1;       
       }
@@ -99,7 +104,8 @@ class Solution {
       int[] E = {-2,-1,0,1,1,2}; // 3
       int[] F = {0,1}; // 2
       int[] G = {0,0}; // 1
-      int[] H = {-2147483648,0}; // 2      
+      int[] H = {-2147483648,0}; // 2
+      int[] I = {-2147483648, -2147483648, -2147483648, -2147483648, 0}; // 2
       System.out.println(sol.solution(A));
       System.out.println(sol.solution(B));
       System.out.println(sol.solution(C));
@@ -108,6 +114,7 @@ class Solution {
       System.out.println(sol.solution(F));      
       System.out.println(sol.solution(G));            
       System.out.println(sol.solution(H));      
+      System.out.println(sol.solution(I));      
    }
 
 }
