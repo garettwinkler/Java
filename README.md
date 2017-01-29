@@ -1,6 +1,5 @@
 # Java
 
-Random java
-practice problems, many from codility
+Random java practice problems, many from Codility and HackerRank
 
-note: codility problems are not directly copy/paste-able to codility. Must first adjust, remove main, any std out debug messages, etc
+note: problems are not directly copy/paste-able to Codility/HackerRank. Must first adjust, remove main, any std out debug messages, etc
