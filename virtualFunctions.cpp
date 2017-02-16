@@ -10,7 +10,7 @@ int studentID = 0;
 int professorID = 0;
 
 class Person {
-    public:
+    protected:
         string name;
         int age;
         
