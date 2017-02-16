@@ -1,0 +1,75 @@
+class LRUCache: public Cache {
+public:
+
+    LRUCache(int capacity) {
+        head = NULL;
+        tail = NULL;
+        cp = capacity;
+    }
+
+    void set(int key, int value) {
+        Node *MRUnode;
+        if (mp.count(key)) {
+            mp[key]->value = value;
+            MRUnode = removeAndReturnNode(key);
+            addToFront(MRUnode);
+        }
+        else {
+            MRUnode = new Node(key, value);
+            addToFront(MRUnode);
+            
+            if (mp.size() > cp) {
+                delete removeAndReturnNode(tail->key);
+            }
+        }
+      
+    }
+
+    int get(int key) {
+        cout << "looking for key: " << key << endl;
+        if (!mp.count(key)) {
+            Node *MRUnode = removeAndReturnNode(key);
+            addToFront(MRUnode);
+            
+            return mp[key]->value;
+        }
+        return -1;
+        
+    }
+
+private:
+    void addToFront(Node *MRUnode) {
+        if (head) {
+            MRUnode->next = head;
+            head->prev = MRUnode;
+            head = MRUnode;
+        }
+        else {
+            head = MRUnode;
+            tail = MRUnode;
+        }
+        mp[MRUnode->key] = MRUnode;
+    }
+    
+    Node* removeAndReturnNode(int key) {
+        auto MRUnode = mp[key]; //idk what auto is..
+        mp.erase(key);
+        
+        if (MRUnode->next) {
+            MRUnode->next->prev = MRUnode->prev;
+        }
+        else {
+            tail = MRUnode->prev;
+        }
+        
+        if (MRUnode->prev) {
+            MRUnode->next->prev = MRUnode->prev;
+        }
+        else {
+            head = MRUnode->next;
+        }
+        
+        return MRUnode;
+    }
+
+};
