@@ -26,8 +26,9 @@ public:
     }
 
     int get(int key) {
-        cout << "looking for key: " << key << endl;
-        if (!mp.count(key)) {
+        //cout << "looking for key: " << key << endl;
+        //cout << "mp.count(key): " << mp.count(key) << endl;
+        if (mp.count(key)) {
             Node *MRUnode = removeAndReturnNode(key);
             addToFront(MRUnode);
             
@@ -54,6 +55,7 @@ private:
     Node* removeAndReturnNode(int key) {
         auto MRUnode = mp[key]; //idk what auto is..
         mp.erase(key);
+
         
         if (MRUnode->next) {
             MRUnode->next->prev = MRUnode->prev;
