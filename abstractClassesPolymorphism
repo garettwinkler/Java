@@ -46,8 +46,6 @@ public:
         }
         else {
             MRUnode = new Node(key, value);
-            //cout << "MRUnode->key: " << MRUnode->key << endl;
-            //cout << "MRUnode->value: " << MRUnode->value << endl;
             addToFront(MRUnode);
             
             if (mp.size() > cp) {
@@ -58,8 +56,6 @@ public:
     }
 
     int get(int key) {
-        //cout << "looking for key: " << key << endl;
-        //cout << "mp.count(key): " << mp.count(key) << endl;
         if (mp.count(key)) {
             Node *MRUnode = removeAndReturnNode(key);
             addToFront(MRUnode);
@@ -107,6 +103,7 @@ private:
     }
 
 };
+
 
 int main() {
    int n, capacity,i;
