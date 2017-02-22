@@ -14,33 +14,36 @@ int solution(int M, vector<int> &A) {
         return 0;   
     }
     
-    count++;        //(0,0) always works
     int front = 0;
     int back = 0;
     int currentElem = A[0];
-    int index = 1;
-    for (unsigned int i = 1; i < A.size(); i++) {
+    int index = 0;
+    
+    for (unsigned int i = 0; i < A.size(); i++) {
         currentElem = A[i];
-        if (front == back) {cout << "here" << endl;}        
-        front = i;
         int compareCount = 0;
-        for (int j = back; j < front; j++) {
-            cout << "Comparing " << currentElem << " to " << A[j] << endl;    
+
+        for (int j = back; j <= front; j++) {
+            cout << "Comparing " << currentElem << " to " << A[j] << endl;                
             if (currentElem == A[j]) {
                 compareCount++;   
             }
         }
-        if (compareCount == 0) {
-            cout << "Distinct slice here" << endl;            
+        
+        if (compareCount == 1) {
+            cout << "Distinct slice here" << endl;        
             count++;
+            front++;
+
         }
         else {
             cout << "Failed slice here" << endl;
+            index++;
             front = index;
             back = index;
-            i = index;
-            index++;
+            i = index-1;
         }
+
     }
     return count;
 }
