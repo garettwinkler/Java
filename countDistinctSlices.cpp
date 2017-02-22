@@ -17,33 +17,38 @@ int solution(int M, vector<int> &A) {
     int front = 0;
     int back = 0;
     int currentElem = A[0];
-    int index = 0;
+    int index = 0;  //index tracks where the back should be. Index must hit all indices.
     
     for (unsigned int i = 0; i < A.size(); i++) {
         currentElem = A[i];
         int compareCount = 0;
 
         for (int j = back; j <= front; j++) {
-            cout << "Comparing " << currentElem << " to " << A[j] << endl;                
+            //cout << "Comparing " << currentElem << " to " << A[j] << endl;                
             if (currentElem == A[j]) {
                 compareCount++;   
             }
         }
         
         if (compareCount == 1) {
-            cout << "Distinct slice here" << endl;        
+            //cout << "Distinct slice here" << endl;        
             count++;
             front++;
-
+            if (i == A.size() - 1) {    // Occurs if we hit the end of array while on a good slice. Reset to index
+                index++;
+                front = index;
+                back = index;
+                i = index-1;                   
+            }
         }
         else {
-            cout << "Failed slice here" << endl;
+            //cout << "Failed slice here" << endl;
             index++;
             front = index;
             back = index;
             i = index-1;
         }
-
     }
+    
     return count;
 }
