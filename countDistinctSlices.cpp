@@ -50,5 +50,5 @@ int solution(int M, vector<int> &A) {
         }
     }
     
-    return count;
+    return count; 
 }
