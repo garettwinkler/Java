@@ -21,15 +21,16 @@ int solution(int M, vector<int> &A) {
     int index = 1;
     for (unsigned int i = 1; i < A.size(); i++) {
         currentElem = A[i];
+        if (front == back) {cout << "here" << endl;}        
         front = i;
         int compareCount = 0;
-        for (int j = back; j <= front; j++) {
+        for (int j = back; j < front; j++) {
             cout << "Comparing " << currentElem << " to " << A[j] << endl;    
             if (currentElem == A[j]) {
                 compareCount++;   
             }
         }
-        if (compareCount <= 1) {
+        if (compareCount == 0) {
             cout << "Distinct slice here" << endl;            
             count++;
         }
