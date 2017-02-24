@@ -16,6 +16,8 @@ class Solution {
             i--;  //parse through trailing 0s
          }
          i--;  //parse far right 1
+         
+         //parse from right(LSB) to left(MSB)
          for (; i>=0; i--) {
             if (binString.charAt(i) == '0') {
                count++;
