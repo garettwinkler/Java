@@ -5,39 +5,26 @@
 // cout << "this is a debug message" << endl;
 
 int solution(vector<int> &A) {
+    
+    if (A.size() == 0) return 0;
+    
     int profit = 0;
-    int minIndex = 0;
-    int maxIndex = 0;
     int min = A[0];
     int max = A[0];
+    profit = max - min;
     for (unsigned int i = 0; i < A.size(); i++) {
         int currentPrice = A[i];
-        cout << currentPrice << endl;
 
         if (currentPrice < min) {
             min = currentPrice;
             max = currentPrice;
-            maxIndex = i;
-            minIndex = i;
-            cout << "Set new min at: " << min << endl;
         }        
         else if (currentPrice > max) {
             max = currentPrice;
-            maxIndex = i;
-            cout << "Set new max at: " << max << endl;
+            if ((max - min) > profit) {
+                profit = max - min;
+            }
         }
     }
-    
-    // cout << "minIndex: " << minIndex << endl;
-    // cout << "maxIndex: " << maxIndex << endl;
-    
-    if (minIndex < maxIndex) {
-        profit = max - min;
-    }
-    
-    // cout << "max: " << max << endl;
-    // cout << "min: " << min << endl;
-    // cout << "profit: " << profit << endl;
-    
     return profit;
 }
