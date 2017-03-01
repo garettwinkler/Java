@@ -5,22 +5,28 @@
 // cout << "this is a debug message" << endl;
 
 int solution(vector<int> &A, vector<int> &B) {
-    int nonOverlapping = 0;
-    int currentEnd = 0;
+    // A = list of starts
+    // B = list of ends
     
-    if (A.size() == 1) return 1;
+    if (A.size() == 0) return 0;
+    if (A.size() == 1) return 1;    
     
-    for (unsigned int i = 0; i < A.size(); i++) {
-        if (A[i] > currentEnd) {
+    int nonOverlapping = 1;
+
+    int rightIndex = A.size()-1;
+    int leftIndex = A.size()-2;
+    while (leftIndex >= 0) {
+        if (B[leftIndex] < A[rightIndex]) {
+            rightIndex = leftIndex;
             nonOverlapping++;
-            currentEnd = B[i];
         }
-        else {
-            
+        else if (A[rightIndex] <= A[leftIndex]) {
+            rightIndex = leftIndex;
         }
-        
+        leftIndex--;
         
     }
+
     
     return nonOverlapping;
     
