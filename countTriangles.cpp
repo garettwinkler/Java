@@ -7,33 +7,26 @@
 #include <algorithm>
 
 int solution(vector<int> &A) {
-    
-    if (A.size() < 3) return 0;
+    int size = A.size();
+    if (size < 3) return 0;
     
     int numTri = 0;
     
-    //sort(A.begin(), A.end());
+    sort(A.begin(), A.end());
     
-    int first = A[0];
-    int second = A[1];
-    int third = A[2];
+    // int first = A[0];
+    // int second = A[1];
+    // int third = A[2];
  
-    for (unsigned int i = 0; i < A.size(); i++) {
-        first = A[i];
-        for (unsigned int j = i+1; j < A.size(); j++) {
-            second = A[j];
-            for (unsigned int k = j+1; k < A.size(); k++) {
-                third = A[k];
-                //cout << "Checking " << first << ", " << second << ", and " << third << endl;
-                if (first + second > third &&
-                    second + third > first &&
-                    first + third > second)     {
-                    
-                    numTri++;
-                    //cout << "the above is good" << endl;
-                }
-            }                 
-        }            
+    for (int i = 0; i < size; i++) {
+        int k = i + 1;
+        for (int j = i + 1; j < size; j++) {
+            while (k < size && A[i] + A[j] > A[k]) {
+                k++;   
+            }
+            numTri += k - j - 1;
+        }
+           
     }
     
 
