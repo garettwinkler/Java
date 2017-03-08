@@ -36,12 +36,15 @@ int solution(vector<int> &A) {
     for (int i = 0; i < size; i++) {
         current = B[i];
         if (current == leader) {
-            sliceCount++;    
-            if ( sliceCount >= ((i+1)/2 + 1) && (max - sliceCount) >= ((size - (i+1))/2+1) ) {
-                equileaders++;
-            }
+            sliceCount++; 
         }
+        if ( sliceCount >= ((i+1)/2 + 1) && (max - sliceCount) >= ((size - (i+1))/2+1) ) {
+            equileaders++;
+            //cout << "Equileader at index: " << i << endl;
+        }
+        
     }
 
     return equileaders;
 }
+
