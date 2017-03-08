@@ -2,14 +2,14 @@
 
 int solution(vector<int> &A) {
     
-    vector<int> B = A;
+    vector<int> B = A;  //copy of A because it gets sorted
 
     int max = 0;    //count of instances of leader 
     int leader;     //leader of whole vector
     int size = A.size();
     int leaderNum = size/2 + 1;
     
-    sort(A.begin(), A.end());
+    sort(A.begin(), A.end());   //sort A
     
     //this block gets the leader and its count
     int count = 1;
