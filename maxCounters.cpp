@@ -11,13 +11,13 @@ vector<int> solution(int N, vector<int> &A) {
     
     int currentMax = 0;
     for (int i = 0; i < size; i++) {
-        if (A[i] < N) {
+        if (A[i] <= N) {
             counters[A[i]-1]++;
             if (counters[A[i]-1] > currentMax) {
                 currentMax = counters[A[i]-1];
             }
         }
-        else {
+        else {  //if equals N+1 (max counter operation)
             counters.assign(N, currentMax);
         }
     }
