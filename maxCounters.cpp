@@ -18,7 +18,8 @@ vector<int> solution(int N, vector<int> &A) {
             }
         }
         else {  //if equals N+1 (max counter operation)
-            counters.assign(N, currentMax);
+            //counters.assign(N, currentMax);
+            fill(counters.begin(), counters.end(), currentMax);
         }
     }
    return counters;
