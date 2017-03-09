@@ -5,33 +5,31 @@
 // cout << "this is a debug message" << endl;
 
 #include <cmath>
+#include <algorithm>
 
-//getFibNum returns the number of different ways of climbing a ladder
-//just happens to be the fib seq.
-int getFibNum(int x) {
-    unsigned long long a = 0;
-    unsigned long long b = 1;
-    unsigned long long fib = 1;
-    for (int i = 0; i < x; i++) {
-        fib = a + b;
-        a = b;
-        b = fib;
+vector<int> fib;
+
+//store a fib seq up to the highest term we'll need 
+//then we'll be able to access it at O(1) each time
+void fillFib(int max) {
+    fib.assign(max+1,0);
+    fib[0] = 1;
+    fib[1] = 1;
+    for (int i = 2; i < max+1; i++) {
+        fib[i] = fib[i-1] + fib[i-2];
     }
-    return fib;
 }
 
 vector<int> solution(vector<int> &A, vector<int> &B) {
     vector<int> climbing;
     int size = A.size();
+    int maxRungs = *(max_element(A.begin(), A.end())); //getting largest number in A (ie max rungs)
+    fillFib(maxRungs);  //creates vector of all fib terms that we'll need
     for (int i = 0; i < size; i++) {
-        //cout << "A[i]: " << A[i] << " ";
-        //cout << "B[i]: " << B[i] << endl;
         int rungs = A[i];
-        unsigned long long ways = getFibNum(rungs);
-        //cout << "fibNum: " << ways << endl;
+        unsigned long long ways = fib[rungs];
         int power = B[i];
         int modNum = pow(2.0, power);
-        //cout << "Result pushed: " << ways % modNum << endl << endl;
         climbing.push_back(ways % modNum);
     }
  
