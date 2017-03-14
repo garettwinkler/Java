@@ -21,6 +21,7 @@ int solution(vector<int> &A) {
     for (int i = 0; i < size; i++) {
         int k = i + 1;
         for (int j = i + 1; j < size; j++) {
+            // *stolen algo*
             // for every i and j we figure out the maximal k that can be a
             // triangular, and when we increase j the former k would still
             // be a triangular because of the sorted array, so we just need
